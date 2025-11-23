@@ -27,8 +27,6 @@ var flatten = function (root) {
 
     preOrder(root, nodesList);
 
-    console.log("nodesList: ", nodesList);
-
     for (let i = 0; i < nodesList.length - 1; i++) {
         nodesList[i].left = null;
         nodesList[i].right = nodesList[i + 1];
