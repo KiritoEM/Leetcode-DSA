@@ -4,7 +4,7 @@
  * @return {number[]}
  */
 var searchRange = function (nums, target) {
-    const findFirst = () => {
+    const binarySearch = (is_left = true) => {
         let left = 0, right = nums.length - 1;
         let result = -1;
 
@@ -13,7 +13,13 @@ var searchRange = function (nums, target) {
 
             if (nums[mid] === target) {
                 result = mid;
-                right = mid - 1;
+
+                if (is_left) {
+                    right = mid - 1;
+                }
+                else {
+                    left = mid + 1;
+                }
             } else if (nums[mid] < target) {
                 left = mid + 1;
             } else {
@@ -22,27 +28,7 @@ var searchRange = function (nums, target) {
         }
 
         return result;
-    };
+    }
 
-    const findLast = () => {
-        let left = 0, right = nums.length - 1;
-        let result = -1;
-
-        while (left <= right) {
-            const mid = Math.floor((left + right) / 2);
-
-            if (nums[mid] === target) {
-                result = mid;
-                left = mid + 1;
-            } else if (nums[mid] < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-
-        return result;
-    };
-
-    return [findFirst(), findLast()];
+    return [binarySearch(), binarySearch(false)];
 };
